@@ -1,11 +1,11 @@
 package main
 
 import(
-	"encoding/json"
+	//"encoding/json"
 	"log"
 	"net/http"
-	"math/rand"
-	"strconv"
+//	"math/rand"
+	//"strconv"
 	"github.com/gorilla/mux"
 
 )
@@ -24,7 +24,7 @@ type Book struct {
 type Author struct {
 	Firstname string `json: "json: firstname"`
 	Lastname string `json: "json: lastname"`
-
+	Nickname string `json: "json: nickname:`
 }
 
 
