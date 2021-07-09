@@ -72,7 +72,14 @@ func updateBook(w http.ResponseWriter, r *http.Request) { //response and request
 	params := mux.Vars(r)
 	for index, item := range books {
 		if item.ID == params["id"] {
-		books = append(books[:index], books[index+1:]...) //like a slice in js, gets rid of book
+			books = append(books[:index], books[index+1:]...)
+			var book Book
+		_ = json.NewDecoder(r.Body).Decode((&book))
+		 //like a slice in js, gets rid of book
+		book.ID= strconv.Itoa(rand.Intn(1000000))
+		books = append(books, book)
+		json.NewEncoder(w).Encode(book)
+			return
 	}
 	}
 	json.NewEncoder(w).Encode(books)
@@ -86,7 +93,7 @@ func deleteBook(w http.ResponseWriter, r *http.Request) { //response and request
 		books = append(books[:index], books[index+1:]...) //like a slice in js, gets rid of book
 		var book Book
 		_= json.NewDecoder(r.Body).Decode(&book)
-		book.ID = params["id"]
+		book.ID = strconv.Itoa(rand.Intn(1000000)) //mockid
 		books = append(books, book)
 		json.NewEncoder(w).Encode(book)
 		return
